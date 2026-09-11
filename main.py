@@ -4,6 +4,7 @@ import mysql.connector
 from seguridad import login, registrar
 from lotes import registrar_lote, consultar_lotes_general, consultar_lotes_por_modelo
 from Embarque import captura_datos, descontar_stock
+from db import conectar_base_datos
 
 
 def mostrar_logo():
@@ -150,17 +151,8 @@ def sistema_inicio(conexion):
                 
 
 if __name__ == "__main__":
-    try:
-        conexion = mysql.connector.connect(
-            host=os.getenv("DB_HOST", "localhost"),
-            user=os.getenv("DB_USER", "root"),
-            password=os.getenv("DB_PASSWORD"),
-            database=os.getenv("DB_NAME")
-        )
-
-        
-        
+    conexion = conectar_base_datos()
+    if conexion:
         sistema_inicio(conexion)
-        
-    except mysql.connector.Error as err:
-        print(f"Error crítico al conectar a la base de datos: {err}")
+    else:
+        print("Error crítico: No se pudo conectar a la base de datos.")

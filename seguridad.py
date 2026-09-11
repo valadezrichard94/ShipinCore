@@ -1,17 +1,12 @@
-import os
-from dotenv import load_dotenv
-import mysql.connector  
-import getpass          
+from db import conectar_base_datos
+import getpass
 import bcrypt
 
-load_dotenv()           
 
 def configurar_sistema():
-    conexion = mysql.connector.connect(
-        host=os.getenv("DB_HOST", "localhost"),
-        user=os.getenv("DB_USER", "root"),
-        password=os.getenv("DB_PASSWORD")
-    )
+    conexion = conectar_base_datos(incluir_db=False)
+    if not conexion:
+        return None, None
 
     cursor = conexion.cursor()  # Crea el cursor para enviar comandos SQL
 
@@ -24,7 +19,7 @@ def configurar_sistema():
             password VARCHAR(255) NOT NULL
         )
     """)
-    return conexion, cursor  # Devuelve la conexión y el cursor para usarlos en otras funciones  # Devuelve la conexión y el cursor para usarlos en otras funciones
+    return conexion, cursor
 
 def registrar():
     db, cursor = configurar_sistema()  # Llama a la configuración para abrir la conexión
