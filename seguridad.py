@@ -6,14 +6,6 @@ import bcrypt
 
 load_dotenv()           
 
-import os
-from dotenv import load_dotenv
-import mysql.connector
-import getpass
-import bcrypt
-
-load_dotenv()
-
 def configurar_sistema():
     conexion = mysql.connector.connect(
         host=os.getenv("DB_HOST", "localhost"),
