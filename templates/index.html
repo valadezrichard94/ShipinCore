@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Embarques - ShipinCore</title>
+    <style>
+        * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: #0f172a; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .card { background: #1e293b; width: 100%; max-width: 440px; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); color: #f8fafc; }
+        h2 { margin-top: 0; text-align: center; font-size: 1.4rem; color: #38bdf8; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: #94a3b8; }
+        input { width: 100%; padding: 10px 12px; background-color: #334155; border: 1px solid #475569; border-radius: 6px; font-size: 1rem; color: white; outline: none; }
+        input:focus { border-color: #38bdf8; }
+        button { width: 100%; padding: 12px; background-color: #0284c7; color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        button:hover { background-color: #0369a1; }
+        .alerta { padding: 12px; border-radius: 6px; margin-bottom: 16px; font-size: 0.9rem; text-align: center; }
+        .exito { background-color: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid #22c55e; }
+        .error { background-color: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Salida de Contenedores</h2>
+
+    {% if mensaje %}
+        <div class="alerta {{ tipo_alerta }}">
+            {{ mensaje }}
+        </div>
+    {% endif %}
+
+    <form method="POST" action="/">
+        <div class="form-group">
+            <label for="operador">Operador:</label>
+            <input type="text" id="operador" name="operador" placeholder="Ej. ricardo77" required>
+        </div>
+
+        <div class="form-group">
+            <label for="id_modelo">ID Modelo Contenedor:</label>
+            <input type="number" id="id_modelo" name="id_modelo" placeholder="Ej. 562013" required>
+        </div>
+
+        <div class="form-group">
+            <label for="cantidad">Cantidad a Despachar:</label>
+            <input type="number" id="cantidad" name="cantidad" placeholder="Ej. 50" min="1" required>
+        </div>
+
+        <button type="submit">Procesar Descuento</button>
+    </form>
+</div>
+
+</body>
+</html>
